@@ -1,7 +1,9 @@
 import { Recipe } from './types';
 
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || '';
+
 export const searchRecipes = async (searchTerm: string, page: number) => {
-  const baseUrl = new URL('http://localhost:5000/api/recipes/search');
+  const baseUrl = new URL(`${API_BASE_URL}/api/recipes/search`);
 
   baseUrl.searchParams.append('searchTerm', searchTerm);
   baseUrl.searchParams.append('page', page.toString());
@@ -15,9 +17,7 @@ export const searchRecipes = async (searchTerm: string, page: number) => {
 };
 
 export const getRecipeSummary = async (recipeId: number) => {
-  const baseUrl = new URL(
-    `http://localhost:5000/api/recipes/${recipeId}/summary`
-  );
+  const baseUrl = new URL(`${API_BASE_URL}/api/recipes/${recipeId}/summary`);
 
   const res = await fetch(baseUrl);
 
@@ -28,7 +28,7 @@ export const getRecipeSummary = async (recipeId: number) => {
 };
 
 export const getFavoriteRecipes = async () => {
-  const url = new URL(`http://localhost:5000/api/recipes/favorite`);
+  const url = new URL(`${API_BASE_URL}/api/recipes/favorite`);
 
   const res = await fetch(url);
 
@@ -39,7 +39,7 @@ export const getFavoriteRecipes = async () => {
 };
 
 export const addFavoriteRecipe = async (recipe: Recipe) => {
-  const url = new URL(`http://localhost:5000/api/recipes/favorite`);
+  const url = new URL(`${API_BASE_URL}/api/recipes/favorite`);
   const body = {
     recipeId: recipe.id,
   };
@@ -58,7 +58,7 @@ export const addFavoriteRecipe = async (recipe: Recipe) => {
 };
 
 export const removeFavoriteRecipe = async (recipe: Recipe) => {
-  const url = new URL(`http://localhost:5000/api/recipes/favorite`);
+  const url = new URL(`${API_BASE_URL}/api/recipes/favorite`);
   const body = {
     recipeId: recipe.id,
   };
