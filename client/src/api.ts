@@ -30,6 +30,8 @@ export const getRecipeSummary = async (recipeId: number) => {
 export const getFavoriteRecipes = async () => {
   const url = new URL(`${API_BASE_URL}/api/recipes/favorite`);
 
+  console.log(url);
+
   const res = await fetch(url);
 
   if (!res.ok) {
